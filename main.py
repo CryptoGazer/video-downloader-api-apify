@@ -34,13 +34,13 @@ def require_api_key(x_api_key: str = Header(..., alias="X-API-Key")) -> bool:
 class InPayload(BaseModel):
     url: AnyHttpUrl
 
-    @field_validator("url")
-    @classmethod
-    def ensure_instagram(cls, v: AnyHttpUrl):
-        host = v.host.lower()
-        if not (host.endswith("instagram.com") or host.endswith("cdninstagram.com")):
-            raise ValueError("URL должен указывать на домен Instagram")
-        return v
+    # @field_validator("url")
+    # @classmethod
+    # def ensure_instagram(cls, v: AnyHttpUrl):
+    #     host = v.host.lower()
+    #     if not (host.endswith("instagram.com") or host.endswith("cdninstagram.com")):
+    #         raise ValueError("URL должен указывать на домен Instagram")
+    #     return v
 
 
 @app.post("/in/instagram", status_code=202, dependencies=[Depends(require_api_key)])
