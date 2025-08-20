@@ -16,7 +16,7 @@ from urllib.parse import urlparse, quote
 app = FastAPI()
 
 
-load_dotenv()
+# load_dotenv()
 
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN")
 ACTOR_ID = "shu8hvrXbJbY3Eb9W"
