@@ -15,7 +15,6 @@ from urllib.parse import urlparse, quote
 
 app = FastAPI()
 
-
 # load_dotenv()
 
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN")
