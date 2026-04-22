@@ -38,7 +38,7 @@ class InPayload(BaseModel):
     # def ensure_instagram(cls, v: AnyHttpUrl):
     #     host = v.host.lower()
     #     if not (host.endswith("instagram.com") or host.endswith("cdninstagram.com")):
-    #         raise ValueError("URL должен указывать на домен Instagram")
+    #         raise ValueError("URL must point to an Instagram domain")
     #     return v
 
 
@@ -92,7 +92,7 @@ def download_instagram_video(
     session = requests.Session()
     headers = {"User-Agent": "Mozilla/5.0", "Accept": "*/*"}
     if range_header:
-        headers["Range"] = range_header  # поддержка частичных запросов
+        headers["Range"] = range_header
 
     r = session.get(src_url, headers=headers, stream=True, allow_redirects=True, timeout=60)
     if r.status_code not in (200, 206):
@@ -122,7 +122,7 @@ def download_instagram_video(
 
     resp = StreamingResponse(iter_bytes(), media_type=content_type, status_code=r.status_code)
     if content_len:
-        resp.headers["Content-Length"] = content_len  # может отсутствовать при chunked
+        resp.headers["Content-Length"] = content_len  # absent for chunked transfer
     if content_range:
         resp.headers["Content-Range"] = content_range
     if accept_ranges:
